@@ -1,0 +1,36 @@
+{
+  "name": "redux-nodejs-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lex0ne/redux-nodejs-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lex0ne/redux-nodejs-chat/issues"
+  },
+  "homepage": "https://github.com/Lex0ne/redux-nodejs-chat#readme",
+  "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.0",
+    "eslint": "^1.10.1",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.10.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "redux": "^3.0.4",
+    "rx": "^4.0.7"
+  }
+}
