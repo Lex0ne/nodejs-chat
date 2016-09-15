@@ -1,12 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry:  [
-    './index.js'
-  ],
+  entry: ['webpack/hot/dev-server' , './index.js'],
   output: {
-    path:     path.join(__dirname, 'public'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js',
+    publicPath: '/public/'
   },
   resolve: {
     modulesDirectories: ['node_modules'],
