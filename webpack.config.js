@@ -1,25 +1,45 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
   entry: {
-    app: ['webpack/hot/dev-server' , './index.js']
+    index: './index.js',
+    app: './app.js',
   },
   output: {
-    path: path.join(__dirname, 'public'),
-    filename: '[name].js',
-    publicPath: '/public/'
-  },
-  resolve: {
-    modulesDirectories: ['node_modules'],
-    extensions:         ['', '.js', '.jsx']
+    path: path.join(__dirname, 'public/javascripts/'),
+    filename: '[name]/[name].js',
+    publicPath: '/public/javascripts/'
   },
   module: {
-    loaders: [
-      {
-        test:    /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['babel']
-      }
-    ]
-  }
+     loaders: [{
+      test:   /\.js$/,
+        include: path.join(__dirname, ''),
+        loader: "babel"
+      }, {
+        test:   /\.jade$/,
+        loader: "jade"
+      }, {
+        test:   /\.styl$/,
+        loader: 'style!css!stylus?resolve url'
+      },]
+  },
+  resolveLoader: {
+    root: path.resolve(__dirname, 'node_modules'),
+    },
+  resolve: {
+      root: path.resolve(__dirname, 'node_modules'),
+      modulesDirectories: [
+          'node_modules',
+      ],
+      extensions: ['.js', '.jsx', ''],
+  },
+  devServer: {
+    contentBase: __dirname,
+    hot: true,
+  },
+    node: {
+      fs: "empty"
+    }
+
 };
