@@ -1,34 +1,27 @@
+
 const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
   entry: {
-    index: './index.js',
+    index: path.join(__dirname, 'src/frontend/index.js'),
   },
   output: {
-    path: path.join(__dirname, 'public/javascripts/'),
+    path: path.join(__dirname, 'dist/public/javascripts/'),
     filename: '[name]/[name].js',
-    publicPath: '/public/javascripts/'
+    publicPath: 'dist/public/javascripts/'
   },
   module: {
-     loaders: [
-         {
+     loaders: [{
       test: /\.jsx?$/,
-             include: __dirname,
+      include: __dirname,
       exclude: /(node_modules|bower_components)/,
       loader: 'babel-loader',
-             query: {
-      presets: ['es2015', 'react'],
-      plugins: ['transform-runtime']
-    }
-    }, {
-            test:   /\.jade$/,
-            loader: "jade"
-          }, {
-            test:   /\.styl$/,
-            loader: 'style!css!stylus?resolve url'
-          },
-     ]
+      query: {
+          presets: ['es2015', 'react'],
+          plugins: ['transform-runtime']
+      }
+    }]
   },
   resolveLoader: {
     root: path.resolve(__dirname, 'node_modules'),

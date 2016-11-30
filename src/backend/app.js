@@ -4,8 +4,8 @@
  */
 
 import express from 'express';
-import routes from './routes';
-import user from './routes/user';
+import * as indexRoutes from './routes/index';
+import * as userRoutes from './routes/user';
 import http from 'http';
 import path from 'path';
 
@@ -25,13 +25,13 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if ('development' === app.get('env')) {
+    app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', indexRoutes.index);
+app.get('/users', userRoutes.list);
 
 http.createServer(app).listen(app.get('port'), () => {
-  console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });
