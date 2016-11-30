@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'dist/public/javascripts/'),
-    filename: '[name]/[name].js',
+    filename: '[name].js',
     publicPath: 'dist/public/javascripts/'
   },
   module: {
