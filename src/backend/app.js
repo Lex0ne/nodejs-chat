@@ -9,13 +9,15 @@ import * as userRoutes from './routes/user';
 import http from 'http';
 import path from 'path';
 import config from './config/index';
+import getLogger from './lib/logger';
 
+const log = getLogger(module);
 const app = express();
 const PORT = config.get('port');
 app.set('port', PORT);
 
 http.createServer(app).listen(PORT, () => {
-    console.log(`Express server listening on port ${PORT}`);
+    log.info(`Express server listening on port ${PORT}`);
 });
 
 app.use((req, res, next) => {
