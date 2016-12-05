@@ -4,7 +4,7 @@
   "description": "Highlight text react",
   "main": "./public/frontend/index.js",
   "scripts": {
-    "build": "babel ./src/backend -d ./dist/backend",
+    "build": "babel ./src/backend -d ./dist/backend  --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -44,5 +44,9 @@
   "peerDependencies": {
     "react": "^0.14.8 || ^15.0.0",
     "react-dom": "^0.14.8 || ^15.0.0"
+  },
+  "dependencies": {
+    "nconf": "0.8.4",
+    "winston": "2.3.0"
   }
 }
