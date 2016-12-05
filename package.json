@@ -4,12 +4,7 @@
   "description": "Highlight text react",
   "main": "./public/frontend/index.js",
   "scripts": {
-    "build:backend": "babel ./src/backend -d ./dist",
-    "build:frontend": "webpack --progress",
-    "build": "npm run build:frontend && npm run build:backend",
-    "watch": "babel --watch ./src/backend -d ./dist",
-    "lint:backed": "eslint ./src/backend",
-    "lint:frontend": "eslint ./src/frontend",
+    "build": "babel ./src/backend -d ./dist/backend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [

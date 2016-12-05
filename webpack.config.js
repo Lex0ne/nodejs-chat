@@ -7,9 +7,9 @@ module.exports = {
     index: path.join(__dirname, 'src/frontend/index.js'),
   },
   output: {
-    path: path.join(__dirname, 'dist/public/javascripts/'),
+    path: path.join(__dirname, 'dist/frontend/'),
     filename: '[name].js',
-    publicPath: 'dist/public/javascripts/'
+    publicPath: 'dist/frontend/'
   },
   module: {
      loaders: [{
