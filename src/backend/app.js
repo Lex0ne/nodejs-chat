@@ -1,11 +1,8 @@
 
-/**
- * Module dependencies.
- */
-
 import express from 'express';
 import * as indexRoutes from './routes/index';
 import * as userRoutes from './routes/user';
+import ejsLocals from 'ejs-locals';
 import http from 'http';
 import path from 'path';
 import config from './config/index';
@@ -13,42 +10,49 @@ import getLogger from './lib/logger';
 
 const log = getLogger(module);
 const app = express();
-const PORT = config.get('port');
-app.set('port', PORT);
+app.engine('ejs', ejsLocals); // layout partial block
+app.set('views', __dirname + '/template');
+app.set('view engine', 'ejs');
 
-http.createServer(app).listen(PORT, () => {
-    log.info(`Express server listening on port ${PORT}`);
+app.use(express.favicon()); // /favicon.ico
+if (app.get('env') === 'development') {
+    app.use(express.logger('dev'));
+} else {
+    app.use(express.logger('default'));
+}
+
+app.use(express.bodyParser());  // req.body....
+
+app.use(express.cookieParser()); // req.cookies
+
+app.use(app.router);
+
+app.get('/', (req, res, next) => {
+    res.render('index', {
+        body: '<b>Hello</b>'
+    });
 });
 
-app.use((req, res, next) => {
-    return req.url === '/' ? res.end('Hello') : next();
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-    return req.url === '/test' ? res.end('Test') : next();
-});
 
-app.use((req, res) => {
-    return res.send(404);
+app.use((err, req, res, next) => {
+  // NODE_ENV = 'production'
+    if (app.get('env') === 'development') {
+        const errorHandler = express.errorHandler();
+        errorHandler(err, req, res, next);
+    } else {
+        res.send(500);
+    }
 });
+/*
+var routes = require('./routes');
+var user = require('./routes/user');
+// all environments
+app.get('/', routes.index);
+app.get('/users', user.list);
+*/
 
-// // all environments
-// app.set('port', process.env.PORT || 3000);
-// app.set('views', __dirname + '/views');
-// app.set('view engine', 'ejs');
-// app.use(express.favicon());
-// app.use(express.logger('dev'));
-// app.use(express.bodyParser());
-// app.use(express.methodOverride());
-// app.use(express.cookieParser('your secret here'));
-// app.use(express.session());
-// app.use(app.router);
-// app.use(express.static(path.join(__dirname, 'public')));
-//
-// // development only
-// if ('development' === app.get('env')) {
-//     app.use(express.errorHandler());
-// }
-//
-// app.get('/', indexRoutes.index);
-// app.get('/users', userRoutes.list);
+http.createServer(app).listen(config.get('port'), () => {
+    log.info('Express server listening on port ' + config.get('port'));
+});
