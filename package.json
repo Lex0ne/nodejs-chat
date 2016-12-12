@@ -6,7 +6,8 @@
   "scripts": {
     "vendor": "bower install bootstrap jquery",
     "js": "babel ./src/backend -d ./dist/backend  --copy-files",
-    "build": "npm run js && npm run vendor",
+    "db": "node ./dist/backend/createDb.js",
+    "build": "npm run js && npm run vendor && npm run db",
     "start": "node ./dist/backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
