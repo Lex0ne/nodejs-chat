@@ -1,18 +1,14 @@
-import { MongoClient } from 'mongodb';
-import { format } from 'util';
+import { User } from './models/user';
 
-MongoClient.connect('mongodb://127.0.0.1:27017/chat', (err, db) => {
-    if (err) throw err;
-    let collection = db.collection('test_insert');
-    collection.remove({}, (err, affected) => {
-        if (err) throw err;
-        collection.insert({a: 2}, (err, docs) => {
-            const cursor = collection.find({a: 2});
-            cursor.toArray((err, results) => {
-                console.dir(results);
-                // Let's close the db
-                db.close();
-            });
-        });
-    });
+const user = new User({
+  username: "Tester123",
+  password: "secret"
+});
+
+user.save((err, user, affected) => {
+  if (err) throw err;
+
+  User.findOne({username: "Tester2"}, (err, tester) => {
+    console.log(tester);
+  });
 });
