@@ -1,10 +1,7 @@
 import crypto from 'crypto';
-<<<<<<< HEAD
 import async from 'async';
 import util from 'util';
 
-=======
->>>>>>> 3f3bbde9ec6b32e9f694ff1e77715704937b5c17
 import mongoose from '../lib/mongoose';
 const Schema = mongoose.Schema;
 
@@ -45,7 +42,6 @@ schema.methods.checkPassword = function(password) {
   return this.encryptPassword(password) === this.hashedPassword;
 };
 
-<<<<<<< HEAD
 schema.statics.authorize = function(username, password, callback) {
   const User = this;
 
@@ -82,8 +78,3 @@ export function AuthError(message) {
 util.inherits(AuthError, Error);
 
 AuthError.prototype.name = 'AuthError';
-
-
-=======
-export const User = mongoose.model('User', schema);
->>>>>>> 3f3bbde9ec6b32e9f694ff1e77715704937b5c17
