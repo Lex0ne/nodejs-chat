@@ -1,7 +1,6 @@
 import util from 'util';
 import http from 'http';
 
-// ошибки для выдачи посетителю
 export function HttpError(status, message) {
     Error.apply(this, arguments);
     Error.captureStackTrace(this, HttpError);

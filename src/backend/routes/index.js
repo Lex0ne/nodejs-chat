@@ -2,7 +2,7 @@ import checkAuth from '../middleware/checkAuth';
 import * as frontpage from './frontpage';
 import * as login from './login';
 import * as logout from './logout';
-import * as chat from './frontpage';
+import * as chat from './chat';
 
 export default function(app) {
 

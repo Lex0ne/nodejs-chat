@@ -1,7 +1,7 @@
 <% layout('layout/page') -%>
 <% block('title', "Чат") -%>
 
-<script src="/vendor/bower_components/socket.io-client/dist/socket.io.js"></script>
+<script src="/vendor/socket.io-client/dist/socket.io.min.js"></script>
 
 <div id="room">
   <ul class="list-unstyled"></ul>
@@ -16,9 +16,9 @@
   var form = $('#room form');
 
   var socket = io.connect('', {
-    reconnect: false
+    reconnect: false,
   });
-
+  debugger;
   socket
       .on('message', function(username, message) {
         printMessage(username + "> " + message);
@@ -30,11 +30,13 @@
         printStatus(username + " вошёл в чат");
       })
       .on('connect', function() {
+        debugger;
         printStatus("соединение установлено");
         form.on('submit', sendMessage);
         input.prop('disabled', false);
       })
       .on('disconnect', function() {
+        debugger
         printStatus("соединение потеряно");
         form.off('submit', sendMessage);
         input.prop('disabled', true);

@@ -5,7 +5,7 @@ import async from 'async';
 import cookie from 'cookie';   // npm i cookie
 import sessionStore from '../lib/sessionStore';
 import { HttpError } from '../error/index';
-import { User } from 'models/user';
+import { User } from '../models/user';
 import socketio from 'socket.io';
 const log = _log(module);
 

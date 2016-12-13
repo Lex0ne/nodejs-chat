@@ -1,4 +1,4 @@
-import { User } from 'models/user';
+import { User } from '../models/user';
 
 export default function(req, res, next) {
   req.user = res.locals.user = null;

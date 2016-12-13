@@ -1,9 +1,9 @@
 import express from 'express';
 import http from 'http';
 import path from 'path';
-import config from 'config';
+import config from './config/index';
 import _log from './lib/log';
-import { HttpError } from './error/index';
+import {HttpError} from './error/index';
 import sessionStore from './lib/sessionStore';
 import ejs from 'ejs-locals';
 import sendHttpError from './middleware/sendHttpError';
@@ -66,7 +66,7 @@ app.use((err, req, res, next) => {
 
 
 const server = http.createServer(app);
-server.listen(config.get('port'), () =>{
+server.listen(config.get('port'), () => {
   log.info('Express server listening on port ' + config.get('port'));
 });
 
