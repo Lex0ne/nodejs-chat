@@ -3,7 +3,7 @@
 
 <p>Введите имя пользователя и пароль. Если такого пользователя нет - он будет создан.</p>
 
-<form class="form-horizontal login-form" action="/auth/login" method="POST" name="login-form">
+<form class="form-horizontal login-form" name="login-form">
   <div class="form-group">
     <label for="input-username" class="col-lg-2 control-label">Имя</label>
 
@@ -29,12 +29,14 @@
 <script>
   $(document.forms['login-form']).on('submit', function() {
     var form = $(this);
+
     $('.error', form).html('');
     $(":submit", form).button("loading");
+
     $.ajax({
       url: "/login",
-      data: form.serialize(),
       method: "POST",
+      data: form.serialize(),
       complete: function() {
         $(":submit", form).button("reset");
       },

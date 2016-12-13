@@ -1,8 +1,15 @@
+import checkAuth from '../middleware/checkAuth';
+import * as frontpage from './frontpage';
+import * as login from './login';
+import * as logout from './logout';
+import * as chat from './frontpage';
 
-/*
- * GET home page.
- */
+export default function(app) {
 
-export function index(req, res){
-    res.render('index', { title: 'Express' });
-};
+    app.get('/', frontpage.get);
+    app.get('/login', login.get);
+    app.post('/login', login.post);
+    app.post('/logout', logout.post);
+    app.get('/chat', checkAuth, chat.get);
+
+}

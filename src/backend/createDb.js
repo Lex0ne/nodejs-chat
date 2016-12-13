@@ -1,18 +1,44 @@
-import { MongoClient } from 'mongodb';
-import { format } from 'util';
+import mongoose from './lib/mongoose';
+import async from 'async';
+import * as _users from 'models/user';
 
-MongoClient.connect('mongodb://127.0.0.1:27017/chat', (err, db) => {
-    if (err) throw err;
-    let collection = db.collection('test_insert');
-    collection.remove({}, (err, affected) => {
-        if (err) throw err;
-        collection.insert({a: 2}, (err, docs) => {
-            const cursor = collection.find({a: 2});
-            cursor.toArray((err, results) => {
-                console.dir(results);
-                // Let's close the db
-                db.close();
-            });
-        });
-    });
+
+async.series([
+  open,
+  dropDatabase,
+  requireModels,
+  createUsers
+], (err) => {
+  console.log(arguments);
+  mongoose.disconnect();
+  process.exit(err ? 255 : 0);
 });
+
+function open(callback) {
+  mongoose.connection.on('open', callback);
+}
+
+function dropDatabase(callback) {
+  var db = mongoose.connection.db;
+  db.dropDatabase(callback);
+}
+
+function requireModels(callback) {
+  async.each(Object.keys(mongoose.models), (modelName, callback) => {
+    mongoose.models[modelName].ensureIndexes(callback);
+  }, callback);
+}
+
+function createUsers(callback) {
+
+  const users = [
+    {username: 'Вася', password: 'supervasya'},
+    {username: 'Петя', password: '123'},
+    {username: 'admin', password: 'thetruehero'}
+  ];
+
+  async.each(users, (userData, callback) => {
+    var user = new mongoose.models.User(userData);
+    user.save(callback);
+  }, callback);
+}
