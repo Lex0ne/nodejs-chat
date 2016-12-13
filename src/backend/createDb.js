@@ -1,6 +1,5 @@
 import mongoose from './lib/mongoose';
 import async from 'async';
-import * as _users from 'models/user';
 
 
 async.series([

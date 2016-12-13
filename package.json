@@ -4,7 +4,11 @@
   "description": "Highlight text react",
   "main": "./public/frontend/index.js",
   "scripts": {
-    "build": "babel ./src/backend -d ./dist/backend  --copy-files",
+    "vendor": "bower install bootstrap jquery",
+    "js": "babel ./src/backend -d ./dist/backend  --copy-files",
+    "db": "node ./dist/backend/createDb.js",
+    "build": "npm run js && npm run vendor && npm run db",
+    "start": "node ./dist/backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
@@ -48,6 +52,7 @@
   "dependencies": {
     "ejs-locals": "1.0.2",
     "mongodb": "2.2.14",
+    "mongoose": "4.7.2",
     "nconf": "0.8.4",
     "winston": "2.3.0"
   }
