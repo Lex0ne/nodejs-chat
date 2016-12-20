@@ -1,12 +1,12 @@
 import mongoose from './lib/mongoose';
 import async from 'async';
+import { User } from './models/user';
 
 async.series([
   open,
   dropDatabase,
-  requireModels,
   createUsers
-], function(err) {
+], (err) => {
   console.log(arguments);
   mongoose.disconnect();
   process.exit(err ? 255 : 0);
@@ -21,24 +21,16 @@ function dropDatabase(callback) {
   db.dropDatabase(callback);
 }
 
-function requireModels(callback) {
-  require('./models/user');
-
-  async.each(Object.keys(mongoose.models), function(modelName, callback) {
-    mongoose.models[modelName].ensureIndexes(callback);
-  }, callback);
-}
-
 function createUsers(callback) {
 
-  var users = [
+  const users = [
     {username: 'Вася', password: 'supervasya'},
     {username: 'Петя', password: '123'},
     {username: 'admin', password: 'thetruehero'}
   ];
 
-  async.each(users, function(userData, callback) {
-    var user = new mongoose.models.User(userData);
+  async.each(users, (userData, callback) => {
+    var user = new User(userData);
     user.save(callback);
   }, callback);
 }
