@@ -10,7 +10,7 @@ import sendHttpError from './middleware/sendHttpError';
 import loadUser from './middleware/loadUser';
 import routes from './routes/index';
 import socket from './socket/index';
-import {User} from './models/user';
+
 const log = _log(module);
 const app = express();
 
