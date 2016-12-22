@@ -1,6 +1,5 @@
-import { User } from 'models/user';
-import { HttpError } from 'error';
-import { AuthError } from 'models/user';
+import { User, AuthError } from '../models/user';
+import { HttpError } from '../error/index';
 
 export function get(req, res) {
   res.render('login');
